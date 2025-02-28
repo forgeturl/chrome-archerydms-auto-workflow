@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Archery批量工单提交</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Archery批量工单提交</h1>
+    
+    <div class="tabs">
+      <button class="tab-button active" data-tab="submit">提交工单</button>
+      <button class="tab-button" data-tab="projects">项目配置</button>
+    </div>
+    
+    <div id="submit" class="tab-content active">
+      <h2>批量提交工单</h2>
+      
+      <div class="form-group">
+        <label for="project-select">选择项目：</label>
+        <select id="project-select">
+          <option value="">请选择项目</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>选择环境：</label>
+        <div id="environments-container"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="workflow-name">工单名称：</label>
+        <input type="text" id="workflow-name" placeholder="请输入工单名称">
+      </div>
+      
+      <div class="form-group">
+        <label for="sql-content">SQL语句：</label>
+        <textarea id="sql-content" rows="6" placeholder="请输入SQL语句"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="demand-url">需求链接：</label>
+        <input type="text" id="demand-url" placeholder="可选">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="is-backup" checked>
+          是否备份
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <button id="submit-button">批量提交</button>
+      </div>
+      
+      <div id="submit-status"></div>
+    </div>
+    
+    <div id="projects" class="tab-content">
+      <h2>项目配置</h2>
+      
+      <div id="projects-list"></div>
+      
+      <div class="form-group">
+        <button id="add-project-button">添加项目</button>
+      </div>
+      
+      <div id="project-form" style="display: none;">
+        <h3>项目信息</h3>
+        
+        <div class="form-group">
+          <label for="project-name">项目名称：</label>
+          <input type="text" id="project-name" placeholder="请输入项目名称">
+        </div>
+        
+        <div class="form-group">
+          <label for="group-id">组ID：</label>
+          <input type="text" id="group-id" placeholder="请输入组ID">
+        </div>
+        
+        <div class="form-group">
+          <label for="db-name">数据库名称：</label>
+          <input type="text" id="db-name" placeholder="请输入数据库名称">
+        </div>
+        
+        <div class="form-group">
+          <label for="environments">环境列表：</label>
+          <input type="text" id="environments" placeholder="多个环境用逗号分隔，如：test,uat,online">
+        </div>
+        
+        <div id="instances-container">
+          <!-- 动态生成环境及实例ID配置 -->
+        </div>
+        
+        <div class="form-group">
+          <button id="save-project-button">保存</button>
+          <button id="cancel-project-button">取消</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 
