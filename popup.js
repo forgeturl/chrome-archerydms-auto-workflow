@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 构建请求数据
             const requestData = {
               workflow: {
-                workflow_name: workflowName,
+                workflow_name: `${workflowName}`,
                 demand_url: demandUrl,
                 group_id: project.group_id,
                 instance: instanceId,
@@ -401,7 +401,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 run_date_start: "",
                 run_date_end: ""
               },
-              sql_content: sqlContent.replace(/'/g, "\'")  // 转义单引号
+              sql_content: sqlContent.replace(/'/g, "\'")
             };
             
             console.log('正在准备请求:', `${domain}/api/v1/workflow/`);
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   alert('报错内容：' + JSON.stringify(response.errorData || response.errorMsg));
                 }
               }
-              
+
               // 更新提交状态
               if (completed + failed === total) {
                 if (failed === 0) {
@@ -442,6 +442,33 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         });
       });
+    });
+  });
+  
+  
+  // 添加批量选择环境按钮的事件处理
+  document.getElementById('select-all-env').addEventListener('click', function() {
+    document.querySelectorAll('.env-checkbox').forEach(checkbox => {
+      checkbox.checked = true;
+    });
+  });
+
+  document.getElementById('select-none-env').addEventListener('click', function() {
+    document.querySelectorAll('.env-checkbox').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+  });
+
+  document.getElementById('select-test-env').addEventListener('click', function() {
+    document.querySelectorAll('.env-checkbox').forEach(checkbox => {
+      checkbox.checked = checkbox.value.includes('test') || checkbox.value.includes('测试');
+    });
+  });
+
+  document.getElementById('select-prod-env').addEventListener('click', function() {
+    document.querySelectorAll('.env-checkbox').forEach(checkbox => {
+      checkbox.checked = checkbox.value.includes('online') || checkbox.value.includes('onl') || 
+                        checkbox.value.includes('prod') || checkbox.value.includes('生产');
     });
   });
   
